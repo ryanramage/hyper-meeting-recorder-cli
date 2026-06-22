@@ -1,0 +1,36 @@
+{
+  "name": "hyper-meeting-recorder-cli",
+  "version": "0.0.1",
+  "description": "A personal meeting recorder: capture your mic, transcribe live, and build up a shared hyper-meeting that others can join and the player can replay",
+  "license": "Apache-2.0",
+  "type": "module",
+  "main": "index.js",
+  "bin": {
+    "hyper-meeting-recorder": "bin/cli.js"
+  },
+  "files": [
+    "index.js",
+    "bin/cli.js",
+    "lib/*.js",
+    "README.md"
+  ],
+  "scripts": {
+    "test": "brittle-bare test/all.js",
+    "start": "bare bin/cli.js"
+  },
+  "dependencies": {
+    "@qvac/sdk": "^0.13.5",
+    "b4a": "^1.8.1",
+    "bare-os": "^3.9.1",
+    "bare-subprocess": "^6.1.0",
+    "bare-tui": "file:../bare-tui",
+    "corestore": "^7.10.1",
+    "hyper-meeting": "file:../hyper-meeting",
+    "hyperswarm": "^4.17.0",
+    "paparam": "^1.10.1"
+  },
+  "devDependencies": {
+    "bare-stream": "^2.13.3",
+    "brittle": "^3.19.1"
+  }
+}
