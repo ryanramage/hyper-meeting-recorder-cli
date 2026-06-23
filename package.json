@@ -25,7 +25,7 @@
     "bare-subprocess": "^6.1.0",
     "bare-tui": "file:../bare-tui",
     "corestore": "^7.10.1",
-    "hyper-meeting": "file:../hyper-meeting",
+    "hyper-meeting": "github:ryanramage/hyper-meeting#main",
     "hyperswarm": "^4.17.0",
     "paparam": "^1.10.1"
   },
