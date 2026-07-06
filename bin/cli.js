@@ -25,7 +25,7 @@ const cmd = command(
   flag('--file <path>', 'transcribe a file as if it were a live mic (no microphone needed)'),
   flag('--device <dev>', 'ffmpeg input device (else the platform default mic)'),
   flag('--bootstrap <host:port>', 'custom DHT bootstrap (advanced; default is the public DHT)'),
-  flag('--engine <name>', 'transcription engine: whisper (default) or parakeet'),
+  flag('--engine <name>', 'transcription engine: parakeet (default) or whisper'),
   () => run(cmd)
 )
 
@@ -56,8 +56,8 @@ async function run (cmd) {
     device: cmd.flags.device || null,
     rate: RATE
   })
-  const engine = cmd.flags.engine || 'whisper'
-  const transcriber = engine === 'parakeet' ? new ParakeetTranscriber() : new QvacTranscriber()
+  const engine = cmd.flags.engine || 'parakeet'
+  const transcriber = engine === 'whisper' ? new QvacTranscriber() : new ParakeetTranscriber()
   const meeting = new Meeting({ storageDir, track, isHost, key, bootstrap })
   const session = new RecorderSession({ mic, transcriber, meeting, track, rate: RATE })
 
