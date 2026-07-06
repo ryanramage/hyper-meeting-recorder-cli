@@ -20,6 +20,7 @@
   },
   "dependencies": {
     "@qvac/sdk": "^0.13.5",
+    "@qvac/transcription-parakeet": "^0.7.2",
     "b4a": "^1.8.1",
     "bare-os": "^3.9.1",
     "bare-subprocess": "^6.1.0",

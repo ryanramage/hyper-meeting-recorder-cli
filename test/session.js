@@ -88,6 +88,30 @@ test('guest: capture is deferred until the host admits it (writable flips)', asy
   await session.teardown()
 })
 
+test('anchored transcriber: segments land at their audio position, not arrival time', async function (t) {
+  const meeting = fakeMeeting()
+  const mic = new MockMic({ chunks: [Buffer.alloc(64)], intervalMs: 1 })
+  // Speech at 3.0-5.0s into the recording; with anchored timestamps the
+  // session must preserve that position (segment yield happens ~immediately,
+  // so the old arrival-clock path would have placed it near 0 instead).
+  const transcriber = new MockTranscriber({
+    segments: [{ text: 'late arrival', startMs: 3000, endMs: 5000, id: 0, append: false }]
+  })
+  transcriber.anchoredTimestamps = true
+  const session = new RecorderSession({ mic, transcriber, meeting, track: 'track-me', rate: 16000 })
+
+  await session.start()
+  await sleep(30)
+
+  t.is(meeting.appended.length, 1)
+  const seg = meeting.appended[0]
+  t.ok(seg.start >= 3000 && seg.start < 3100, `start ${seg.start} anchored to the audio position`)
+  t.is(seg.end - seg.start, 2000, 'duration preserved')
+
+  await session.finishRecording()
+  await session.teardown()
+})
+
 test('host: admit() forwards the pasted writer key to the meeting', async function (t) {
   const meeting = fakeMeeting()
   const session = new RecorderSession({
