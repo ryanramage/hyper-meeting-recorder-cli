@@ -24,7 +24,7 @@
     "b4a": "^1.8.1",
     "bare-os": "^3.9.1",
     "bare-subprocess": "^6.1.0",
-    "bare-tui": "file:../bare-tui",
+    "bare-tui": "0.0.3",
     "corestore": "^7.10.1",
     "hyper-meeting": "github:ryanramage/hyper-meeting#main",
     "hyperswarm": "^4.17.0",
