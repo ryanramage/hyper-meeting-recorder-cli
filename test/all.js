@@ -1,4 +1,6 @@
 import './format.js'
 import './mic.js'
+import './summarizer.js'
+import './meeting.js'
 import './session.js'
 import './recorder.js'

@@ -52,6 +52,22 @@ force-quits):
    command, so someone can replay it while you keep serving the data.
 2. **Exit** — tears down the swarm/connections and quits.
 
+### Post-meeting AI features (seeding screen)
+
+Once you've exited the meeting, the seeding screen offers two local-LLM
+features (the model loads lazily on first use, after the transcription model
+has been unloaded):
+
+- **Improve transcriptions** — pick transcript lines (`space` to select,
+  `enter` to ask the LLM), then step through its suggested corrections,
+  accepting (`a`/`enter`) or skipping (`s`) each. Accepted fixes **overwrite
+  the segment in place** and replicate to every peer and the player. The LLM
+  sees the full transcript plus your `--agenda` notes, which helps a lot with
+  names and technical terms.
+- **Generate summary** — summarizes the whole meeting (Key points, Action
+  Items, Topics discussed) and writes it to a tmp file whose path is shown on
+  screen. Override the built-in prompt with `--prompt`.
+
 ### Arguments & flags
 
 - `[key]` — the meeting key to join. **Omit it to host a new meeting.**
@@ -59,6 +75,12 @@ force-quits):
 - `--file <wav>` — transcribe a file in real time instead of the mic (great for
   testing without hardware).
 - `--device <dev>` — a specific ffmpeg input device (else the platform default).
+- `--agenda <path>` — a text file with the agenda / notes, given to the LLM as
+  context for both post-meeting features.
+- `--prompt <path>` — a text file that replaces the built-in meeting-summary
+  prompt.
+- `--llm <name>` — the local LLM to use: `qwen3-0.6b`, `qwen3-1.7b` (default),
+  or `qwen3-4b`. Bigger is better at names/nouns but downloads more.
 - `--bootstrap host:port` — a custom DHT bootstrap node (advanced; default is the
   public DHT).
 
